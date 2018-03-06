@@ -23,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         //设置此页面为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        init();
     }
     private void init(){
         tv_version = (TextView) findViewById(R.id.tv_version);
