@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setInitStatus();
     }
     /**
-     * 
+     *
      */
     private void init(){
         tv_back = (TextView)findViewById(R.id.tv_back);
@@ -143,20 +143,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mCourseBtn.setSelected(true);
                 iv_course.setImageResource(R.drawable.main_course_icon_selected);
                 tv_course.setTextColor(Color.parseColor("#0097F7"));
-                rl_title_bar.setVisibility(View.GONE);
+                rl_title_bar.setVisibility(View.VISIBLE);
                 tv_main_title.setText("博学谷课程");
                 break;
             case 1:
                 mExercisesBtn.setSelected(true);
                 iv_exercises.setImageResource(R.drawable.main_exercises_icon_selected);
                 tv_exercises.setTextColor(Color.parseColor("#0097F7"));
-                rl_title_bar.setVisibility(View.GONE);
+                rl_title_bar.setVisibility(View.VISIBLE);
                 tv_main_title.setText("博学谷习题");
                 break;
             case 2:
                 mMyInfoBtn.setSelected(true);
-                iv_exercises.setImageResource(R.drawable.main_my_icon_selected);
-                tv_exercises.setTextColor(Color.parseColor("#0097F7"));
+                iv_myInfo.setImageResource(R.drawable.main_my_icon_selected);
+                tv_myInfo.setTextColor(Color.parseColor("#0097F7"));
                 rl_title_bar.setVisibility(View.GONE);
                 break;
 
