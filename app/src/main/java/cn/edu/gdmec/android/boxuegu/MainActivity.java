@@ -1,6 +1,7 @@
 package cn.edu.gdmec.android.boxuegu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -15,12 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.edu.gdmec.android.boxuegu.view.MyInfoView;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     //中间内容栏
     private FrameLayout mBodyLayout;
     //底部按钮栏
     private LinearLayout mBottomLayout;
-
     //底部按钮
     private View mCourseBtn;
     private View mExercisesBtn;
@@ -34,8 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv_back;
     private TextView tv_main_title;
     private RelativeLayout rl_title_bar;
-
-
+    private MyInfoView mMyInfoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null){
+            //从设置界面或登录界面传递过来的登录状态
+            boolean isLogin = data.getBooleanExtra("isLogin",false);
+            if (isLogin){
+                clearBottomImageState();
+                selectDisplayView(0);
+            }
+            if (mMyInfoView != null){
+                //登录成功或退出登录时根据isLogin设置我的界面
+                mMyInfoView.setLoginParams(isLogin);
+            }
+        }
+    }
+
     /**
      * 获取底部导航栏上的部件
      */
@@ -201,6 +220,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 2:
                 //我
+                if (mMyInfoView == null){
+                    mMyInfoView = new MyInfoView(this);
+                    mBodyLayout.addView(mMyInfoView.getView());
+                }else {
+                    mMyInfoView.getView();
+                }
+                mMyInfoView.showView();
                 break;
         }
     }
