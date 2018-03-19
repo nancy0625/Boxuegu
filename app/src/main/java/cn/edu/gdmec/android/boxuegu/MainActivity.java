@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setInitStatus();
     }
     /**
-     *
+     *更新版本
      */
     private void init(){
         tv_back = (TextView)findViewById(R.id.tv_back);
