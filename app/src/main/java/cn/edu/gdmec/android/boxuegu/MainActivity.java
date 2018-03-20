@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initBottomBar();
         setListener();
         setInitStatus();
+        Intent intent = new Intent( MainActivity.this,LoginActivity.class);
+        startActivityForResult(intent,1);
+
 
 
     }
@@ -66,18 +69,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
         tv_back.setVisibility(View.GONE);
         initBodyLayout();
-        Timer timer = new Timer();
+       /* Timer timer = new Timer();
         //Timertask 类表示一个在指定时间内执行的task
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent( MainActivity.this,LoginActivity.class);
-                startActivityForResult(intent,1);
 
             }
         };
         timer.schedule(task,3000);//设置这个task在延迟3秒后自动执行跳转
-
+*/
 
     }
 
