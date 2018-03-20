@@ -16,6 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import cn.edu.gdmec.android.boxuegu.activity.LoginActivity;
+import cn.edu.gdmec.android.boxuegu.activity.SplashActivity;
 import cn.edu.gdmec.android.boxuegu.view.MyInfoView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initBottomBar();
         setListener();
         setInitStatus();
+
+
     }
     /**
      *更新版本
@@ -59,6 +66,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
         tv_back.setVisibility(View.GONE);
         initBodyLayout();
+        Timer timer = new Timer();
+        //Timertask 类表示一个在指定时间内执行的task
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent = new Intent( MainActivity.this,LoginActivity.class);
+                startActivityForResult(intent,1);
+
+            }
+        };
+        timer.schedule(task,3000);//设置这个task在延迟3秒后自动执行跳转
 
 
     }
@@ -70,8 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //从设置界面或登录界面传递过来的登录状态
             boolean isLogin = data.getBooleanExtra("isLogin",false);
             if (isLogin){
-                clearBottomImageState();
-                selectDisplayView(0);
+                String userName = data.getStringExtra("userName");
+                Toast.makeText(this,userName+"登录成功",Toast.LENGTH_LONG).show();
+               /* clearBottomImageState();
+                selectDisplayView(0);*/
             }
             if (mMyInfoView != null){
                 //登录成功或退出登录时根据isLogin设置我的界面

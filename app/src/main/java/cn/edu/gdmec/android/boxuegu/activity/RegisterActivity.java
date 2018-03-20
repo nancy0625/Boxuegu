@@ -33,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //设置页面布局
         setContentView(R.layout.activity_register);
+        init();
 
     }
     private void init(){

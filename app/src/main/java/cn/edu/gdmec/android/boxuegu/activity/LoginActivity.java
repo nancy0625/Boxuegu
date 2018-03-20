@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //設置此页面为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        init();
 
     }
     /**
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_register = (TextView)findViewById(R.id.tv_register);
         tv_find_psw = (TextView)findViewById(R.id.tv_find_psw);
         btn_login = (Button)findViewById(R.id.btn_login);
-        et_user_name = (EditText)findViewById(R.id.et_user_name);
+        et_user_name = (EditText)findViewById(R.id.et_userLogin_name);
         et_psw = (EditText)findViewById(R.id.et_psw);
         //返回按钮的点击事件
         tv_back.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("TTT","D");
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivityForResult(intent,1);
             }
@@ -91,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     //把登录成功的撞他传递到MainActivity中
                     Intent data = new Intent();
                     data.putExtra("isLogin",true);
+                    data.putExtra("userName",userName);
                     setResult(RESULT_OK,data);
                     LoginActivity.this.finish();
 
