@@ -40,7 +40,7 @@ public class ModifyPswActivity extends AppCompatActivity {
         tv_back = (TextView)findViewById(R.id.tv_back);
         et_original_psw = (EditText)findViewById(R.id.et_original_psw);
         et_new_psw = (EditText)findViewById(R.id.et_new_psw);
-        et_new_psw_again = (EditText)findViewById(R.id.et_original_psw);
+        et_new_psw_again = (EditText)findViewById(R.id.et_new_psw_again);
         btn_save = (Button)findViewById(R.id.btn_save);
         tv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class ModifyPswActivity extends AppCompatActivity {
                     startActivity(intent);
                     SettingActivity.instance.finish();//关闭设置页面
                     ModifyPswActivity.this.finish();//关闭本页面
-                    return;
+
                 }
 
             }
