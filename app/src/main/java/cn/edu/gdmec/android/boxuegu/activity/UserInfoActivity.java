@@ -1,11 +1,13 @@
 package cn.edu.gdmec.android.boxuegu.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +24,9 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     private TextView tv_nickName,tv_signature,tv_user_name,tv_sex;
     private RelativeLayout rl_nickName,rl_sex,rl_signature,rl_title_bar;
     private String spUserName;
+    private static final int CHANGE_NICKNAME = 1;//修改昵称的自定义常量
+    private static final int CHANGE_SIGNATURE = 2;//修改签名的自定义常量
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +86,70 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
                 this.finish();
             break;
             case R.id.rl_nickName:
+                String name = tv_nickName.getText().toString();
+                Bundle bdName = new Bundle();
+                bdName.putString("content",name);
+                bdName.putString("title","昵称");
+                bdName.putInt("flag",1);
+                enterActivityForResult(ChangeUserInfoActivity.class,CHANGE_NICKNAME,bdName);
                 break;
             case R.id.rl_sex:
                 String sex = tv_sex.getText().toString();
                 sexDialog(sex);
                 break;
             case R.id.rl_signature:
+                String signature = tv_signature.getText().toString();
+                Bundle bdSignature = new Bundle();
+                bdSignature.putString("content",signature);
+                bdSignature.putString("title","签名");
+                bdSignature.putInt("flag",2);
+                enterActivityForResult(ChangeUserInfoActivity.class,CHANGE_SIGNATURE,bdSignature);
                 break;
                 default:
                     break;
         }
 
+
+    }
+
+    /**
+     * 回传数据
+     * @param sex
+     */
+    private String new_info;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case CHANGE_NICKNAME://个人资料修改界面回传过来的昵称数据
+                if (data != null){
+                new_info = data.getStringExtra("nickName");
+                if (TextUtils.isEmpty(new_info)){
+                    return;
+                }
+                tv_nickName.setText(new_info);
+                //更新数据库中的昵称字段
+                    DBUtils.getInstance(UserInfoActivity.this).updateUserInfo(
+                            "nickName",new_info,spUserName
+                    );
+
+
+                }
+                break;
+            case CHANGE_SIGNATURE://个人资料修改界面回传过来的签名数据
+                if (data != null){
+                new_info = data.getStringExtra("signature");
+                if (TextUtils.isEmpty(new_info)){
+                    return;
+                }
+                tv_signature.setText(new_info);
+                //更新数据库中的签名字段
+                    DBUtils.getInstance(UserInfoActivity.this).updateUserInfo("signature",new_info,spUserName);
+                }
+                break;
+
+        }
     }
 
     private void sexDialog(String sex) {
@@ -126,6 +184,17 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
     public void setSex(String sex) {
        tv_sex.setText(sex);
+       //更新数据库中的性别字段
        DBUtils.getInstance(UserInfoActivity.this).updateUserInfo("sex",sex,spUserName);
+    }
+    /**
+     * 获取传回数据时需要使用的跳转方法，第一个参数to表示需要跳转到的界面
+     * 第2个参数requestCode表示一个请求码，第3个参数表示跳转传递的数据
+     */
+    public void enterActivityForResult(Class<?> to,int requestCode,Bundle b){
+        Intent i = new Intent(this,to);
+        i.putExtras(b);
+        startActivityForResult(i,requestCode);
+
     }
 }
