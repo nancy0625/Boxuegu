@@ -23,7 +23,7 @@ public class SQLiteHelper  extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + U_USERINFO + "(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "userame VARCHAR, " +
+                "userName VARCHAR, " +
                 "nickName VARCHAR, " +
                 "sex VARCHAR, " +
                 "signature VARCHAR" +

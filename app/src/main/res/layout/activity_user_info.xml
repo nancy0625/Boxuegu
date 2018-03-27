@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="頭    像"
+            android:text="头    像"
             android:textColor="#000000"
             android:textSize="16sp"/>
         <ImageView
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="用戶名"
+            android:text="用户名"
             android:textColor="#000000"
             android:textSize="16sp"/>
         <TextView
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="昵    稱"
+            android:text="昵    称"
             android:textColor="#000000"
             android:textSize="16sp"/>
         <TextView
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="簽    名"
+            android:text="签    名"
             android:textColor="#000000"
             android:textSize="16sp"/>
         <TextView
