@@ -12,6 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.edu.gdmec.android.boxuegu.MainActivity;
+import cn.edu.gdmec.android.boxuegu.MainActivity1;
 import cn.edu.gdmec.android.boxuegu.R;
 
 public class SplashActivity extends AppCompatActivity {
