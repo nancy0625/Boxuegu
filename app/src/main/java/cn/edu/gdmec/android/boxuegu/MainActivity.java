@@ -34,6 +34,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ImageView bottom_bar_image_myinfo;
     private RelativeLayout bottom_bar_myinfo_btn;
     private LinearLayout main_bottom_bar;
+    private RelativeLayout rl_title_bar;
+    private TextView tv_main_title;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         bottom_bar_course_btn.setOnClickListener(this);
         bottom_bar_exercises_btn.setOnClickListener(this);
         bottom_bar_myinfo_btn.setOnClickListener(this);
+        tv_main_title = (TextView)findViewById(R.id.tv_main_title);
+        tv_main_title.setText("博学谷课程");
+        rl_title_bar = (RelativeLayout)findViewById(R.id.title_bar);
+        rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
     }
     private void setSelectedStatus(int index){
         switch (index){
@@ -74,38 +80,38 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 bottom_bar_image_course.setImageResource(R.drawable.main_course_icon_selected);
                 bottom_bar_text_course.setTextColor(Color.parseColor("#0097F7"));
 
-                bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon_selected);
+                bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon);
                 bottom_bar_text_exercises.setTextColor(Color.parseColor("#666666"));
 
-                bottom_bar_image_myinfo.setImageResource(R.drawable.main_my_icon_selected);
+                bottom_bar_image_myinfo.setImageResource(R.drawable.main_my_icon);
                 bottom_bar_text_myinfo.setTextColor(Color.parseColor("#666666"));
-                //rl_title_bar.setVisibility(View.VISIBLE);
-                //tv_main_title.setText("博学谷课程");
+                rl_title_bar.setVisibility(View.VISIBLE);
+                tv_main_title.setText("博学谷课程");
                 break;
             case 1:
                 //bottom_bar_exercises_btn.setSelected(true);
                 bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon_selected);
                 bottom_bar_text_exercises.setTextColor(Color.parseColor("#0097F7"));
 
-                bottom_bar_image_course.setImageResource(R.drawable.main_course_icon_selected);
+                bottom_bar_image_course.setImageResource(R.drawable.main_course_icon);
                 bottom_bar_text_course.setTextColor(Color.parseColor("#666666"));
 
-                bottom_bar_image_myinfo.setImageResource(R.drawable.main_my_icon_selected);
+                bottom_bar_image_myinfo.setImageResource(R.drawable.main_my_icon);
                 bottom_bar_text_myinfo.setTextColor(Color.parseColor("#666666"));
-                //rl_title_bar.setVisibility(View.VISIBLE);
-                //tv_main_title.setText("博学谷习题");
+                rl_title_bar.setVisibility(View.VISIBLE);
+                tv_main_title.setText("博学谷习题");
                 break;
             case 2:
                // mMyInfoBtn.setSelected(true);
                 bottom_bar_image_myinfo.setImageResource(R.drawable.main_my_icon_selected);
                 bottom_bar_text_myinfo.setTextColor(Color.parseColor("#0097F7"));
 
-                bottom_bar_image_course.setImageResource(R.drawable.main_course_icon_selected);
+                bottom_bar_image_course.setImageResource(R.drawable.main_course_icon);
                 bottom_bar_text_course.setTextColor(Color.parseColor("#666666"));
 
-                bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon_selected);
+                bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon);
                 bottom_bar_text_exercises.setTextColor(Color.parseColor("#666666"));
-                //rl_title_bar.setVisibility(View.GONE);
+                rl_title_bar.setVisibility(View.GONE);
                 break;
 
         }
