@@ -19,14 +19,14 @@ import cn.edu.gdmec.android.boxuegu.activity.ExercisesBean;
 
 public class ExercisesAdapter extends BaseAdapter {
     private Context mContext;
-    private List<ExercisesAdapter> ebl;
+    private List<ExercisesBean> ebl;
     public ExercisesAdapter(Context context){
         this.mContext = context;
     }
     /**
      * 设置数据更新界面
      */
-    public void setData(List<ExercisesAdapter> ebl){
+    public void setData(List<ExercisesBean> ebl){
         this.ebl = ebl;
         notifyDataSetChanged();
     }
@@ -87,7 +87,8 @@ public class ExercisesAdapter extends BaseAdapter {
         if (convertView == null){
             vh = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.exercises_list_item,null);
-            vh.title = (TextView)convertView.findViewById(R.id.tv_content);
+            vh.title = (TextView)convertView.findViewById(R.id.tv_title);
+            vh.content = (TextView)convertView.findViewById(R.id.tv_content);
             vh.order = (TextView)convertView.findViewById(R.id.tv_order);
             convertView.setTag(vh);
         }else {
