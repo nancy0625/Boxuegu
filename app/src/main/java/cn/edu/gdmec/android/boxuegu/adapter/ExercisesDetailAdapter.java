@@ -191,7 +191,7 @@ public class ExercisesDetailAdapter extends BaseAdapter {
                         vh.iv_a.setImageResource(R.drawable.exercises_a);
                         vh.iv_b.setImageResource(R.drawable.exercises_right_icon);
                         vh.iv_c.setImageResource(R.drawable.exercises_c);
-                    }else  if (bean.answer == 4){
+                    }else  if (bean.answer == 3){
                         vh.iv_a.setImageResource(R.drawable.exercises_a);
                         vh.iv_b.setImageResource(R.drawable.exercises_b);
                         vh.iv_c.setImageResource(R.drawable.exercises_right_icon);

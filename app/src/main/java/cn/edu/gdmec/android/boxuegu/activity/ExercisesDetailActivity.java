@@ -53,6 +53,7 @@ public class ExercisesDetailActivity extends AppCompatActivity {
         tv.setTextColor(Color.parseColor("#000000"));
         tv.setTextSize(16.0f);
         tv.setText("一、选择题");
+        tv.setPadding(10,15,0,0);
         lv_list.addHeaderView(tv);
         tv_main_title.setText(title);
         tv_back.setOnClickListener(new View.OnClickListener() {
