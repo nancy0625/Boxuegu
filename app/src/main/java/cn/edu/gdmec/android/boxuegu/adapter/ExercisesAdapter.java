@@ -2,7 +2,6 @@ package cn.edu.gdmec.android.boxuegu.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cn.edu.gdmec.android.boxuegu.ExercisesDetailActivity;
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.activity.ExercisesBean;
+import cn.edu.gdmec.android.boxuegu.activity.ExercisesDetailActivity;
 
 /**
  * Created by asus on 2018/3/28.
