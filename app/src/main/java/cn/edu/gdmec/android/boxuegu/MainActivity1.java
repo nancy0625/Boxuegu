@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import cn.edu.gdmec.android.boxuegu.activity.ExercisesView;
 import cn.edu.gdmec.android.boxuegu.activity.LoginActivity;
+import cn.edu.gdmec.android.boxuegu.view.CourseView;
 import cn.edu.gdmec.android.boxuegu.view.MyInfoView;
 
 public class MainActivity1 extends AppCompatActivity implements View.OnClickListener{
@@ -39,6 +40,7 @@ public class MainActivity1 extends AppCompatActivity implements View.OnClickList
     private TextView tv_main_title;
     private RelativeLayout rl_title_bar;
     private ExercisesView mExercisesView;
+    private CourseView mCourseView;
     private MyInfoView mMyInfoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,6 +235,13 @@ public class MainActivity1 extends AppCompatActivity implements View.OnClickList
         switch (viewIndex){
             case 0:
                 //课程页面
+                if (mCourseView == null){
+                    mCourseView = new CourseView(this);
+                    mBodyLayout.addView(mCourseView.getView());
+                }else {
+                    mCourseView.getView();
+                }
+                mCourseView.showView();
                 break;
             case 1:
                 //习题
