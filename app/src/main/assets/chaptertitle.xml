@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<infos>
+    <course id = "1">
+        <imgtitle>Android 开发环境搭建</imgtitle>
+        <title>第1章 Android 基础入门</title>
+        <intro>      Android 是Google公司基于Linux平台开发的手机及平板电脑的操作系统。自问世以来，收到了前所未有的关注，并成为移动平台最受欢迎的操作系统之一。本章将针对Android的基础知识进行详细的讲解</intro>
+    </course>
+    <course id = "2">
+        <imgtitle>Android 五大布局</imgtitle>
+        <title>第2章 Android UI开发</title>
+        <intro>      Android 程序开发最重要的一个环节就是界面处理，界面的美观度直接影响用户的第一印象，因此，开发一个整齐、美观的界面是至关重要的，本章将针对Android中的UI开发进行详细的讲解。</intro>
+    </course>
+    <course id = "3">
+        <imgtitle>Activity 的使用</imgtitle>
+        <title>第3章 Activity</title>
+        <intro>      在显示生活中，经常会使用手机进行打电话、发短信、玩游戏等，这就需要与手机界面进行交互。在Android系统中，用户与程序的交互是通过Activity完成的。同时Activity是Android四大组件中最常用的一个，本章将针对Activity的相关知识进行详细的讲解。</intro>
+    </course>
+
+</infos>
