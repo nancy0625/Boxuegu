@@ -43,11 +43,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if (data != null){
             boolean isLogin = data.getBooleanExtra("isLogin",false);
             if (isLogin){
-                setMain();
+                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,new FragmentCourseFragment()).commit();
+                setSelectedStatus(0);
 
             }else {
-               setMain();
-                //setSelectedStatus(2);
+                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,new FragmentMyinfoFragment()).commit();
+                setSelectedStatus(2);
             }
         }
     }
@@ -126,7 +127,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon);
                 bottom_bar_text_exercises.setTextColor(Color.parseColor("#666666"));
-                rl_title_bar.setVisibility(View.GONE);
+                rl_title_bar.setVisibility(View.VISIBLE);
+                tv_main_title.setText("我");
 
                 break;
 
@@ -161,15 +163,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bottom_bar_course_btn:
-                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,new FragmentCourseFragment()).commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,new FragmentCourseFragment()).commit();
                 setSelectedStatus(0);
                 break;
             case R.id.bottom_bar_exercises_btn:
-                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,new FragmentExercisesFragment()).commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,new FragmentExercisesFragment()).commit();
                 setSelectedStatus(1);
                 break;
             case R.id.bottom_bar_myinfo_btn:
-                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,new FragmentMyinfoFragment()).commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,new FragmentMyinfoFragment()).commit();
                 setSelectedStatus(2);
                 break;
         }
