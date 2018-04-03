@@ -76,7 +76,7 @@ public class ModifyPswActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_register:
+            case R.id.btn_save:
                 getEditString();
                 if (TextUtils.isEmpty(originalPsw)){
                     Toast.makeText(ModifyPswActivity.this,"请输入原始密码",Toast.LENGTH_SHORT).show();
