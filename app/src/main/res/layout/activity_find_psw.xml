@@ -65,11 +65,27 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        android:text="输入您的新密码"
         android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:visibility="gone"/>
+        android:textSize="18sp"
+        android:visibility="gone"
+        />
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/et_newpsw"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/find_psw_icon"
+        android:hint="请输入新密码"
+        android:paddingLeft="8dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#a3a3a3"
+        />
     <Button
         android:id="@+id/btn_validate"
         android:layout_width="match_parent"

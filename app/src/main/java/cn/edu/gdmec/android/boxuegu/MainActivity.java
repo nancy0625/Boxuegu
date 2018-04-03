@@ -1,22 +1,22 @@
 package cn.edu.gdmec.android.boxuegu;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cn.edu.gdmec.android.boxuegu.Fragment.FragmentCourseFragment;
 import cn.edu.gdmec.android.boxuegu.Fragment.FragmentExercisesFragment;
 import cn.edu.gdmec.android.boxuegu.Fragment.FragmentMyinfoFragment;
-import cn.edu.gdmec.android.boxuegu.R;
+import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
 /**
  * Created by asus on 2018/3/27.
@@ -38,6 +38,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView tv_main_title;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null){
+            boolean isLogin = data.getBooleanExtra("isLogin",false);
+            if (isLogin){
+                setMain();
+
+            }else {
+               setMain();
+                //setSelectedStatus(2);
+            }
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -50,7 +65,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
     private void setMain(){
         this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,new FragmentMyinfoFragment()).commit();
-        setSelectedStatus(0);
+        setSelectedStatus(2);
     }
 
     private void initView() {
@@ -112,9 +127,29 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon);
                 bottom_bar_text_exercises.setTextColor(Color.parseColor("#666666"));
                 rl_title_bar.setVisibility(View.GONE);
+
                 break;
 
         }
+    }
+
+    protected  long exitTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            if ((System.currentTimeMillis() - exitTime) > 2000){
+                Toast.makeText(MainActivity.this,"再按一次退出博学谷",Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            }else {
+                this.finish();
+                if (AnalysisUtils.readLoginStatus(this)){
+                    AnalysisUtils.readLoginStatus(this);
+                }
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /**

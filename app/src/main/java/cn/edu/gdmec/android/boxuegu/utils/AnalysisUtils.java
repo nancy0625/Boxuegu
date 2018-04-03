@@ -29,6 +29,20 @@ public class AnalysisUtils {
         String userName = sp.getString("loginUserName","");
         return userName;
     }
+    //读取登录状态
+    public static boolean readLoginStatus(Context context){
+        SharedPreferences sp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+        boolean isLogin = sp.getBoolean("isLogin",false);
+        return isLogin;
+    }
+    //清除登录状态
+    public static void clearLoginStatus(Context context){
+        SharedPreferences sp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("isLogin",false);
+        editor.putString("loginUserName","");
+        editor.commit();
+    }
     public static void setABCDEnable(boolean value, ImageView iv_a,ImageView iv_b,ImageView iv_c,ImageView iv_d){
         iv_a.setEnabled(value);
         iv_b.setEnabled(value);
@@ -138,6 +152,7 @@ public class AnalysisUtils {
         }
         return courseInfos;
     }
+
 
 
 }

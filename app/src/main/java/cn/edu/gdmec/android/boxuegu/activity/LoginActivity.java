@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.edu.gdmec.android.boxuegu.Fragment.FragmentMyinfoFragment;
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.utils.MD5Utils;
 
@@ -98,7 +99,12 @@ public class LoginActivity extends AppCompatActivity {
                     data.putExtra("isLogin",true);
                     data.putExtra("userName",userName);
                     setResult(RESULT_OK,data);
+
                     LoginActivity.this.finish();
+
+                    //getSupportFragmentManager().beginTransaction().add(R.id.main_body,new FragmentMyinfoFragment()).commit();
+
+
 
                     return;
                 }else if (!TextUtils.isEmpty(spPsw)&&!md5Psw.equals(spPsw)){

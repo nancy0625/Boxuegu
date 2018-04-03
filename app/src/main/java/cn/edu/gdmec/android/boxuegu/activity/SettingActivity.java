@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import cn.edu.gdmec.android.boxuegu.R;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tv_main_title;
     private TextView tv_back;
     private RelativeLayout rl_title_bar;
@@ -31,52 +31,20 @@ public class SettingActivity extends AppCompatActivity {
         init();
 
     }
-    private void init(){
-        tv_main_title = (TextView)findViewById(R.id.tv_main_title);
+    private void init() {
+        tv_main_title = (TextView) findViewById(R.id.tv_main_title);
         tv_main_title.setText("设置");
-        tv_back = (TextView)findViewById(R.id.tv_back);
-        rl_title_bar = (RelativeLayout)findViewById(R.id.title_bar);
+        tv_back = (TextView) findViewById(R.id.tv_back);
+        rl_title_bar = (RelativeLayout) findViewById(R.id.title_bar);
         rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
-        rl_modify_psw = (RelativeLayout)findViewById(R.id.rl_modify_psw);
-        rl_security_setting = (RelativeLayout)findViewById(R.id.rl_security_setting);
-        rl_exit_login = (RelativeLayout)findViewById(R.id.rl_exit_login);
-        tv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SettingActivity.this.finish();
-            }
-        });
-        //修改密码点击事件
-        rl_modify_psw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳转
-                Intent intent = new Intent(SettingActivity.this,ModifyPswActivity.class);
-                startActivity(intent);
-            }
-        });
-        //设置密保的点击事件
-        rl_security_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //密保页面
-                Intent intent = new Intent(SettingActivity.this,FindPswActivity.class);
-                intent.putExtra("from","security");
-                startActivity(intent);
-            }
-        });
-        //退出登录的点击事件
-        rl_exit_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SettingActivity.this,"退出登录成功",Toast.LENGTH_SHORT).show();
-                clearLoginStatus();;
-                Intent data = new Intent();
-                data.putExtra("isLogin",false);
-                setResult(RESULT_OK,data);
-                SettingActivity.this.finish();
-            }
-        });
+        rl_modify_psw = (RelativeLayout) findViewById(R.id.rl_modify_psw);
+        rl_security_setting = (RelativeLayout) findViewById(R.id.rl_security_setting);
+        rl_exit_login = (RelativeLayout) findViewById(R.id.rl_exit_login);
+
+        tv_back.setOnClickListener(this);
+        rl_modify_psw.setOnClickListener(this);
+        rl_security_setting.setOnClickListener(this);
+        rl_exit_login.setOnClickListener(this);
     }
     /**
      * 清楚登录信息
@@ -87,5 +55,32 @@ public class SettingActivity extends AppCompatActivity {
         editor.putBoolean("isLogin",false);
         editor.putString("loginUserName","");
         editor.commit();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_back:
+                SettingActivity.this.finish();
+                break;
+            case R.id.rl_modify_psw:
+                Intent intent = new Intent(SettingActivity.this,ModifyPswActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_security_setting:
+                //密保页面
+                Intent intent1 = new Intent(SettingActivity.this, FindPswActivity.class);
+                intent1.putExtra("from","security");
+                startActivity(intent1);
+                break;
+            case R.id.rl_exit_login:
+                Toast.makeText(SettingActivity.this,"退出登录成功",Toast.LENGTH_SHORT).show();
+                clearLoginStatus();;
+                Intent data = new Intent();
+                data.putExtra("isLogin",false);
+                setResult(RESULT_OK,data);
+                SettingActivity.this.finish();
+
+        }
     }
 }

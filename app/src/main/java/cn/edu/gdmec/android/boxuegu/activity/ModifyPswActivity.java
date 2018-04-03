@@ -17,7 +17,7 @@ import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 import cn.edu.gdmec.android.boxuegu.utils.MD5Utils;
 
-public class ModifyPswActivity extends AppCompatActivity {
+public class ModifyPswActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tv_main_title;
     private TextView tv_back;
     private EditText et_original_psw,et_new_psw,et_new_psw_again;
@@ -42,16 +42,41 @@ public class ModifyPswActivity extends AppCompatActivity {
         et_new_psw = (EditText)findViewById(R.id.et_new_psw);
         et_new_psw_again = (EditText)findViewById(R.id.et_new_psw_again);
         btn_save = (Button)findViewById(R.id.btn_save);
-        tv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ModifyPswActivity.this.finish();
-            }
-        });
+        tv_back.setOnClickListener(this);
         //保存按钮的点击事件
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+       btn_save.setOnClickListener(this);
+    }
+    /**
+     * 获取控件上的字符串
+     */
+    private void getEditString(){
+        originalPsw = et_original_psw.getText().toString().trim();
+        newPsw = et_new_psw.getText().toString().trim();
+        newPswAgain = et_new_psw_again.getText().toString().trim();
+    }
+    /**
+     * 修改登录成功时保存在SharedPreferences中的密码
+     */
+    private void modifyPsw(String newPsw){
+        String md5Psw = MD5Utils.md5(newPsw);//将密码用MD5加密
+        SharedPreferences sp = getSharedPreferences("loginInfo",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(userName,md5Psw);//保存新改的密码
+        editor.commit();
+    }
+    /**
+     * 从SharedPreferences中读取原始的密码
+     */
+    private String readPsw(){
+        SharedPreferences sp = getSharedPreferences("loginInfo",MODE_PRIVATE);
+        String spPsw = sp.getString(userName,"");
+        return spPsw;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_register:
                 getEditString();
                 if (TextUtils.isEmpty(originalPsw)){
                     Toast.makeText(ModifyPswActivity.this,"请输入原始密码",Toast.LENGTH_SHORT).show();
@@ -81,37 +106,11 @@ public class ModifyPswActivity extends AppCompatActivity {
                     ModifyPswActivity.this.finish();//关闭本页面
 
                 }
-
-            }
-        });
-
+                break;
+            case R.id.tv_back:
+                ModifyPswActivity.this.finish();
+                break;
+        }
     }
-    /**
-     * 获取控件上的字符串
-     */
-    private void getEditString(){
-        originalPsw = et_original_psw.getText().toString().trim();
-        newPsw = et_new_psw.getText().toString().trim();
-        newPswAgain = et_new_psw_again.getText().toString().trim();
-    }
-    /**
-     * 修改登录成功时保存在SharedPreferences中的密码
-     */
-    private void modifyPsw(String newPsw){
-        String md5Psw = MD5Utils.md5(newPsw);//将密码用MD5加密
-        SharedPreferences sp = getSharedPreferences("loginInfo",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(userName,md5Psw);//保存新改的密码
-        editor.commit();
-    }
-    /**
-     * 从SharedPreferences中读取原始的密码
-     */
-    private String readPsw(){
-        SharedPreferences sp = getSharedPreferences("loginInfo",MODE_PRIVATE);
-        String spPsw = sp.getString(userName,"");
-        return spPsw;
-    }
-
 }
 
