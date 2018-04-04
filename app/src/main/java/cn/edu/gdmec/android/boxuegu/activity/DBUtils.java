@@ -59,4 +59,11 @@ public class DBUtils {
         cv.put(key,value);
         db.update(SQLiteHelper.U_USERINFO,cv,"userName=?",new String[]{userName});
     }
+    /**
+     * 保存视频播放资料
+     */
+    public void saveVideoPlayList(VideoBean bean,String userName){
+        //判断如果里面有此播放记录则需要删除重新播放
+       // if ()
+    }
 }
