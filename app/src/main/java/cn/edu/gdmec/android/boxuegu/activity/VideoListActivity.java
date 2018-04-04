@@ -1,5 +1,7 @@
 package cn.edu.gdmec.android.boxuegu.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,6 +61,7 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
                 }else{
                     //判断用户是否登录，若登录则吧此视频添加到数据库
 
+
                 }
             }
         });
@@ -67,5 +70,10 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
 
+    }
+    private boolean readLoginStatus(){
+        SharedPreferences sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+        boolean isLogin = sp.getBoolean("isLogin",false);
+        return isLogin;
     }
 }
