@@ -13,6 +13,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringBufferInputStream;
 import java.util.List;
 
 import cn.edu.gdmec.android.boxuegu.R;
@@ -70,6 +75,39 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
 
+    }
+
+    /**
+     * 读取数据流，参数in是数据流
+     * @return
+     */
+    private String read(InputStream in){
+        BufferedReader reader = null;
+        StringBuilder sb = null;
+        String line = null;
+
+        try {
+            sb = new StringBuilder();//实例化一个StringBuilder对象
+            //用InputStreamReader把in这个字节流转化成字符流BufferReader
+            reader = new BufferedReader(new InputStreamReader(in));
+            while ((line = reader.readLine()) != null){
+                sb.append(line);
+                sb.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }finally {
+            {
+                if (in != null)
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }
+        }
+        return sb.toString();
     }
     private boolean readLoginStatus(){
         SharedPreferences sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
