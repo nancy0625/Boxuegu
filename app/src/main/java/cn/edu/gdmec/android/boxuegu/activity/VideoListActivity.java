@@ -3,6 +3,7 @@ package cn.edu.gdmec.android.boxuegu.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,15 +14,20 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringBufferInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.adapter.VideoListAdapter;
+import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
 public class VideoListActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tv_intro,tv_video,tv_chapter_intro;
@@ -44,7 +50,7 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
         intro = getIntent().getStringExtra("intro");
         //创建数据库工具类的对象
         db = DBUtils.getInstance(VideoListActivity.this);
-        //initData();
+        initData();
         init();
     }
     private void init(){
@@ -66,15 +72,78 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
                 }else{
                     //判断用户是否登录，若登录则吧此视频添加到数据库
 
+                    if (readLoginStatus()){
+                        String userName = AnalysisUtils.readLoginUserName(VideoListActivity.this);
 
+                       // db.saveVideoPlayList(videoList.get(position),userName);
+                    }
+
+                    //跳转到播放视频界面
                 }
             }
         });
+        lv_video_list.setAdapter(adapter);
+        tv_intro.setOnClickListener(this);
+        tv_video.setOnClickListener(this);
+        adapter.setData(videoList);
+        tv_chapter_intro.setText(intro);
+        tv_intro.setBackgroundColor(Color.parseColor("#30B4FF"));
+        tv_video.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        tv_intro.setTextColor(Color.parseColor("#FFFFFF"));
+        tv_video.setTextColor(Color.parseColor("#000000"));
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_intro://简介
+                lv_video_list.setVisibility(View.GONE);
+            sv_chapter_intro.setVisibility(View.VISIBLE);
+            tv_intro.setBackgroundColor(Color.parseColor("#30B4FF"));
+            tv_video.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            tv_intro.setTextColor(Color.parseColor("#FFFFFF"));
+            tv_video.setTextColor(Color.parseColor("#000000"));
+            break;
+            case R.id.tv_video://视频
+                lv_video_list.setVisibility(View.VISIBLE);
+            sv_chapter_intro.setVisibility(View.GONE);
+            tv_intro.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            tv_video.setBackgroundColor(Color.parseColor("30B4FF"));
+            tv_intro.setTextColor(Color.parseColor("#000000"));
+            tv_video.setTextColor(Color.parseColor("#FFFFFF"));
+            break;
+            default:
+                break;
 
+        }
+
+    }
+    /**
+     * 设置视频列表本地数据
+     */
+    private void initData(){
+        JSONArray jsonArray;
+        InputStream is = null;
+        try {
+            is = getResources().getAssets().open("data.json");
+            jsonArray = new JSONArray(read(is));
+            videoList = new ArrayList<VideoBean>();
+            for (int i = 0;i<jsonArray.length();i++){
+                VideoBean bean = new VideoBean();
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (jsonObject.getInt("chapterId") == chapterId){
+                    bean.chapterId = jsonObject.getInt("chapterId");
+                    bean.videoId = Integer.parseInt(jsonObject.getString("videoId"));
+                    bean.title = jsonObject.getString("title");
+                    bean.secondTitle = jsonObject.getString("secondTitle");
+                    bean.videoPath = jsonObject.getString("videoPath");
+                    videoList.add(bean);
+                }
+                bean = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -102,6 +171,8 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
                 if (in != null)
                     try {
                         in.close();
+                        if (reader != null)
+                            reader.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
