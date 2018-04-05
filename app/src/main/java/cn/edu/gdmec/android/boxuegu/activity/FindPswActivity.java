@@ -149,7 +149,7 @@ public class FindPswActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.btn_validate:
                 submit();
-                if (!psw.equals("")||psw.equals(" ")){
+                if (!psw.equals("")||!psw.equals(" ")){
                    FindPswActivity.this.finish();
                 }
                // FindPswActivity.this.finish();
