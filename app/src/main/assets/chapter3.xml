@@ -1,53 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <infos>
-    <exercises id="1">
-        <subject>
-            1.Android安装包文件简称APK，其扩展名是（）
-        </subject>
-        <a>.exe</a>
-        <b>.txt</b>
-        <c>.apk</c>
-        <d>.app</d>
-        <answer>3</answer>
-    </exercises>
-    <exercises id="2">
-        <subject>
-            2.下列选项中不属于ADT Bundle的是（）
-        </subject>
-        <a>.Eclipse</a>
-        <b>.SDK</b>
-        <c>.SDK Manager.exe</c>
-        <d>.JDK</d>
-        <answer>4</answer>
-    </exercises>
-    <exercises id="3">
-        <subject>
-            3.应用程序层是一个核心应用程序的集合，主要包括（）
-        </subject>
-        <a>活动管理器</a>
-        <b>短信程序</b>
-        <c>音频驱动</c>
-        <d>Dalvik 虚拟机</d>
-        <answer>2</answer>
-    </exercises>
-    <exercises id="4">
-        <subject>
-            4.ADB的常见指令中“列出所有设备”的指令是（）
-        </subject>
-        <a>adb uninstall</a>
-        <b>adb install</b>
-        <c>adb device</c>
-        <d>adb emulator-avd</d>
-        <answer>3</answer>
-    </exercises>
-    <exercises id="5">
-        <subject>
-            5.创建程序时，填写的Application Name表示（）
-        </subject>
-        <a>应用名称</a>
-        <b>项目名称</b>
-        <c>项目的包名</c>
-        <d>类的名字</d>
-        <answer>1</answer>
-    </exercises>
+  <exercises id="1">
+      <subject>1.一个应用程序默认会包含（）个Activity。</subject>
+      <a>1个</a>
+      <b>5个</b>
+      <c>10个</c>
+      <d>若干个</d>
+      <answer>1</answer>
+  </exercises>
+  <exercises id="2">
+      <subject>2.下列方法中，Activity从启动到关闭不会执行的是（）。</subject>
+      <a>onCreate()</a>
+      <b>onStart()</b>
+      <c>onResume()</c>
+      <d>onRestart()</d>
+      <answer>4</answer>
+  </exercises>
+  <exercises id="3">
+      <subject>3.下列组件中，不能使用Intent启动的是（）。</subject>
+      <a>Activity</a>
+      <b>启动服务</b>
+      <c>广播</c>
+      <d>内容提供者</d>
+      <answer>4</answer>
+  </exercises>
+  <exercises id="4">
+      <subject>4.startActivityForResult()方法接收两个参数，第一个是Intent，第二个是（）。</subject>
+      <a>resultCode</a>
+      <b>requestCode</b>
+      <c>请求码</c>
+      <d>data</d>
+      <answer>3</answer>
+  </exercises>
+  <exercises id="5">
+      <subject>5.下列关于Activity的描述，错误的是（）。</subject>
+      <a>Activity是Android四大组件之一</a>
+      <b>Activity有四种启动模式</b>
+      <c>Activity通常用于开启一个广播事件</c>
+      <d>Activity就像一个界面管理员，用户在界面上的操作是通过Activity来管理</d>
+      <answer>3</answer>
+  </exercises>
 </infos>

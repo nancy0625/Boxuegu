@@ -1,53 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <infos>
-    <exercises id="1">
-        <subject>
-            1.Android安装包文件简称APK，其扩展名是（）
-        </subject>
-        <a>.exe</a>
-        <b>.txt</b>
-        <c>.apk</c>
-        <d>.app</d>
-        <answer>3</answer>
-    </exercises>
-    <exercises id="2">
-        <subject>
-            2.下列选项中不属于ADT Bundle的是（）
-        </subject>
-        <a>.Eclipse</a>
-        <b>.SDK</b>
-        <c>.SDK Manager.exe</c>
-        <d>.JDK</d>
-        <answer>4</answer>
-    </exercises>
-    <exercises id="3">
-        <subject>
-            3.应用程序层是一个核心应用程序的集合，主要包括（）
-        </subject>
-        <a>活动管理器</a>
-        <b>短信程序</b>
-        <c>音频驱动</c>
-        <d>Dalvik 虚拟机</d>
-        <answer>2</answer>
-    </exercises>
-    <exercises id="4">
-        <subject>
-            4.ADB的常见指令中“列出所有设备”的指令是（）
-        </subject>
-        <a>adb uninstall</a>
-        <b>adb install</b>
-        <c>adb device</c>
-        <d>adb emulator-avd</d>
-        <answer>3</answer>
-    </exercises>
-    <exercises id="5">
-        <subject>
-            5.创建程序时，填写的Application Name表示（）
-        </subject>
-        <a>应用名称</a>
-        <b>项目名称</b>
-        <c>项目的包名</c>
-        <d>类的名字</d>
-        <answer>1</answer>
-    </exercises>
+  <exercises id="1">
+      <subject>1.以下属性中，哪个属性可以“在指定控件左边”是（）。</subject>
+      <a>android:layout_alignLeft</a>
+      <b>android:layout_alignParentLeft</b>
+      <c>android:layout_Left</c>
+      <d>android:layout_toLeftOf</d>
+      <answer>4</answer>
+  </exercises>
+  <exercises id="2">
+      <subject>2.表格布局中android:layout_column属性的作用是指定（）。</subject>
+      <a>行数</a>
+      <b>列数</b>
+      <c>总行数</c>
+      <d>总列数</d>
+      <answer>4</answer>
+  </exercises>
+  <exercises id="3">
+      <subject>3.实际开发中刮刮乐游戏的布局是按照（）布局写的。</subject>
+      <a>相对布局</a>
+      <b>线性布局</b>
+      <c>帧布局</c>
+      <d>绝对布局</d>
+      <answer>3</answer>
+  </exercises>
+  <exercises id="4">
+      <subject>4.网格布局是Android（）新增的布局。</subject>
+      <a>3.0</a>
+      <b>3.1</b>
+      <c>3.2</c>
+      <d>4.0</d>
+      <answer>4</answer>
+  </exercises>
+  <exercises id="5">
+      <subject>5.相对布局中，“是否跟父布局对齐”是属性（）。</subject>
+      <a>android:layout_alignBottom</a>
+      <b>android:layout_alignParentBottom</b>
+      <c>android:layout_alignBaseline</c>
+      <d>android:layout_below</d>
+      <answer>3</answer>
+  </exercises>
 </infos>
