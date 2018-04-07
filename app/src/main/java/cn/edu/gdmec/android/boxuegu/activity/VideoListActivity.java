@@ -1,6 +1,7 @@
 package cn.edu.gdmec.android.boxuegu.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -79,6 +80,10 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
                     }
 
                     //跳转到播放视频界面
+                    Intent intent = new Intent(VideoListActivity.this,VideoPlayActivity.class);
+                    intent.putExtra("videoPath",videoPath);
+                    intent.putExtra("position",position);
+                    startActivityForResult(intent,1);
                 }
             }
         });
@@ -118,6 +123,24 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
         }
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null){
+            //接收播放界面回传回来的被选中的视频的位置
+            int position = data.getIntExtra("position",0);
+            adapter.setSelectedPosition(position);//设置被选中的位置
+            // 选项卡被选中时所有图标的颜色值
+            lv_video_list.setVisibility(View.VISIBLE);
+            sv_chapter_intro.setVisibility(View.GONE);
+            tv_intro.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            tv_video.setBackgroundColor(Color.parseColor("#30B4FF"));
+            tv_intro.setTextColor(Color.parseColor("#000000"));
+            tv_video.setTextColor(Color.parseColor("#FFFFFF"));
+        }
+    }
+
     /**
      * 设置视频列表本地数据
      */
