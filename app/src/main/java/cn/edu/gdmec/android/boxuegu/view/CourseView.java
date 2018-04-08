@@ -36,7 +36,7 @@ public class CourseView {
     private LayoutInflater mInflater;
     private View mCurrentView;
     private ViewPager adPager;
-    private View adBannerLay;
+    private View adBannerLay;//广告条容器
     private AdBannerAdapter ada;
     public static final int MSG_AD_SLID = 002;
     private ViewPagerIndicator vpi;
@@ -143,7 +143,7 @@ public class CourseView {
      */
     private void resetSize(){
         int sw = getScreenWidth(mContext);
-        int adLheight = sw;//广告条高度
+        int adLheight = sw/2;//广告条高度
         ViewGroup.LayoutParams adlp = adBannerLay.getLayoutParams();
         adlp.width = sw;
         adlp.height = adLheight;
