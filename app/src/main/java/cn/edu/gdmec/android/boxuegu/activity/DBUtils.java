@@ -83,14 +83,14 @@ public class DBUtils {
         cv.put("videoId",bean.videoId);
         cv.put("videoPath",bean.videoPath);
         cv.put("title",bean.title);
-        cv.put("secondTitle",bean.title);
+        cv.put("secondTitle",bean.secondTitle);
         db.insert(SQLiteHelper.U_VIDEO_PLAY_LIST,null,cv);
     }
     /**
      * 获取视频记录信息
      */
     public List<VideoBean> getVideoHistory(String userName){
-        String sql = " SELECT * FROM "+ SQLiteHelper.U_VIDEO_PLAY_LIST+"" +
+        String sql = "SELECT * FROM "+ SQLiteHelper.U_VIDEO_PLAY_LIST+
                 " WHERE userName=?";
         Cursor cursor = db.rawQuery(sql,new String[]{userName});
         List<VideoBean> vbl = new ArrayList<VideoBean>();
@@ -118,8 +118,8 @@ public class DBUtils {
      */
     public boolean hasVideoPlay(int chapterId,int videoId,String userName){
         boolean hasVideo = false;
-        String sql = "SELECT * FROM "+SQLiteHelper.U_VIDEO_PLAY_LIST+" WHERE chapterId=? AND userName=?";
-        Cursor cursor = db.rawQuery(sql,new String[]{ chapterId + "",videoId + ",userName"});
+        String sql = "SELECT * FROM "+SQLiteHelper.U_VIDEO_PLAY_LIST+" WHERE chapterId=? AND videoId=? AND userName=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{ chapterId + "",videoId + "",userName});
         if (cursor.moveToFirst()){
             hasVideo = true;
         }

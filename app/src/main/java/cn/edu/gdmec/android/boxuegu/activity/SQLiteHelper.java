@@ -33,6 +33,7 @@ public class SQLiteHelper  extends SQLiteOpenHelper{
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "userName VARCHAR, " +
                 "chapterId INT, " +
+                "videoId INT,"+
                 "videoPath VARCHAR, " +
                 "title VARCHAR," +
                 "secondTitle VARCHAR" +

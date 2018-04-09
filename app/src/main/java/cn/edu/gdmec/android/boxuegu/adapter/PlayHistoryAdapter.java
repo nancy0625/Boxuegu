@@ -59,6 +59,7 @@ public class PlayHistoryAdapter extends BaseAdapter {
             vh = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.play_history_list_item,null);
             vh.tv_title = (TextView)convertView.findViewById(R.id.tv_adapter_title);
+            vh.tv_video_title = (TextView)convertView.findViewById(R.id.tv_video_title);
             vh.iv_icon = (ImageView)convertView.findViewById(R.id.iv_video_icon);
             convertView.setTag(vh);
         }else {
@@ -99,15 +100,17 @@ public class PlayHistoryAdapter extends BaseAdapter {
                 case 10:
                     vh.iv_icon.setImageResource(R.drawable.video_play_icon10);
                     break;
-                    default:
-                        vh.iv_icon.setImageResource(R.drawable.video_play_icon1);
-                        break;
+                default:
+                    vh.iv_icon.setImageResource(R.drawable.video_play_icon1);
+                    break;
             }
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (bean == null){
+                   return;
+                }else {
                     //跳转到播放视频界面
                     Intent intent = new Intent(mContext, VideoPlayActivity.class);
                     intent.putExtra("videoPath",bean.videoPath);

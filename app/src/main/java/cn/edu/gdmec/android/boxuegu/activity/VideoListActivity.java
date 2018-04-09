@@ -76,7 +76,7 @@ public class VideoListActivity extends AppCompatActivity implements View.OnClick
                     if (readLoginStatus()){
                         String userName = AnalysisUtils.readLoginUserName(VideoListActivity.this);
 
-                       // db.saveVideoPlayList(videoList.get(position),userName);
+                        db.saveVideoPlayList(videoList.get(position),userName);
                     }
 
                     //跳转到播放视频界面
