@@ -104,6 +104,7 @@ public class FindPswActivity extends AppCompatActivity implements View.OnClickLi
 
     private void submit(){
         String validateName = et_validate_name.getText().toString().trim();
+
         if ("security".equals(from)) {
             //設置密保
             if (TextUtils.isEmpty(validateName)) {
@@ -149,9 +150,12 @@ public class FindPswActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.btn_validate:
                 submit();
-                if (!psw.equals("")||!psw.equals(" ")){
-                   FindPswActivity.this.finish();
+                if (!"security".equals(from)){
+                    if (!psw.equals("")){
+                        FindPswActivity.this.finish();
+                    }
                 }
+
                // FindPswActivity.this.finish();
                 break;
                 case R.id.tv_back:
