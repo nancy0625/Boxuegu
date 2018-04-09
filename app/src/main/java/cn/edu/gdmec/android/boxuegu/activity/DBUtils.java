@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.edu.gdmec.android.boxuegu.view.CourseView;
+
 /**
  * Created by asus on 2018/3/26.
  */
@@ -80,6 +85,28 @@ public class DBUtils {
         cv.put("title",bean.title);
         cv.put("secondTitle",bean.title);
         db.insert(SQLiteHelper.U_VIDEO_PLAY_LIST,null,cv);
+    }
+    /**
+     * 获取视频记录信息
+     */
+    public List<VideoBean> getVideoHistory(String userName){
+        String sql = " SELECT * FROM "+ SQLiteHelper.U_VIDEO_PLAY_LIST+"" +
+                " WHERE userName=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{userName});
+        List<VideoBean> vbl = new ArrayList<VideoBean>();
+        VideoBean bean = null;
+        while (cursor.moveToNext()){
+            bean = new VideoBean();
+            bean.chapterId = cursor.getInt(cursor.getColumnIndex("chapterId"));
+            bean.videoId = cursor.getInt(cursor.getColumnIndex("videoId"));
+            bean.videoPath = cursor.getString(cursor.getColumnIndex("videoPath"));
+            bean.title = cursor.getString(cursor.getColumnIndex("title"));
+            bean.secondTitle = cursor.getString(cursor.getColumnIndex("secondTitle"));
+            vbl.add(bean);
+            bean = null;
+        }
+        cursor.close();
+        return vbl;
     }
 
     /**
