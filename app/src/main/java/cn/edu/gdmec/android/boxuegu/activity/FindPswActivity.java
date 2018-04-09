@@ -156,7 +156,6 @@ public class FindPswActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 }
 
-               // FindPswActivity.this.finish();
                 break;
                 case R.id.tv_back:
                     FindPswActivity.this.finish();
