@@ -27,7 +27,8 @@ public class SQLiteHelper  extends SQLiteOpenHelper{
                 "userName VARCHAR, " +
                 "nickName VARCHAR, " +
                 "sex VARCHAR, " +
-                "signature VARCHAR" +
+                "signature VARCHAR," +
+                "qq VARCHAR"+
                 ")");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + U_VIDEO_PLAY_LIST + "(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
