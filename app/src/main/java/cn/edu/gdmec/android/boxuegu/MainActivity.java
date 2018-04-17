@@ -51,6 +51,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 setSelectedStatus(2);
             }
         }
+        if (requestCode == 000){
+            setSelectedStatus(1);
+        }
     }
 
     @Override

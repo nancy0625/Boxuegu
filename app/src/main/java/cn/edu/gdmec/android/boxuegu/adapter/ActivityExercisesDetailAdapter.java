@@ -1,103 +1,74 @@
 package cn.edu.gdmec.android.boxuegu.adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
-import android.media.Image;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.activity.ExercisesBean;
 import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
-/**
- * Created by asus on 2018/3/29.
- */
+public class ActivityExercisesDetailAdapter extends RecyclerView.Adapter<ActivityExercisesDetailAdapter.ViewHolder> {
 
-public class ExercisesDetailAdapter extends BaseAdapter {
-    private Context mContext;
-    private List<ExercisesBean> ebl = new ArrayList<ExercisesBean>();
+    private List<ExercisesBean> objects = new ArrayList<ExercisesBean>();
+
+    private Context context;
     private LayoutInflater layoutInflater;
     private OnSelectListener onSelectListener;
+    private ArrayList<String> selectedPosition = new ArrayList<String>();
+    private MyItemClickListener mItemClickListener;
 
-
-    public ExercisesDetailAdapter(Context context, OnSelectListener onSelectListener){
-        this.mContext = context;
-        this.onSelectListener = onSelectListener;
+    public ActivityExercisesDetailAdapter(Context context,OnSelectListener onSelectListener) {
+        this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
+        this.onSelectListener = onSelectListener;
     }
 
+
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.exercises_detail_list_item,parent,false);
+        //ViewHolder holder = new ViewHolder(view,mItemClickListener);
+        return new ViewHolder(view,mItemClickListener);
+    }
+
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        initializeViews(objects.get(position),holder,position);
+
+    }
     public void setData(List<ExercisesBean> ebl){
-        this.ebl = ebl;
-        notifyDataSetChanged();
-    }
-    /**
-     * How many items are in the data set represented by this Adapter.
-     *
-     * @return Count of items.
-     */
-    @Override
-    public int getCount() {
-        return ebl == null ? 0 : ebl.size();
-    }
+        this.objects = ebl;
 
-    /**
-     * Get the data item associated with the specified position in the data set.
-     *
-     * @param position Position of the item whose data we want within the adapter's
-     *                 data set.
-     * @return The data at the specified position.
-     */
-    @Override
-    public Object getItem(int position) {
-        return ebl == null ? null : ebl.get(position);
     }
 
 
-
-
-    /**
-     * Get the row id associated with the specified position in the list.
-     *
-     * @param position The position of the item within the adapter's data set whose row id we want.
-     * @return The id of the item at the specified position.
-     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-
-    private ArrayList<String> selectedPosition = new ArrayList<String>();
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        final ViewHolder vh;
-        if (convertView == null){
-            vh = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.exercises_detail_list_item,null);
-            vh.subject = (TextView) convertView.findViewById(R.id.tv_subject);
-            vh.tv_a = (TextView)convertView.findViewById(R.id.tv_a);
-            vh.tv_b = (TextView)convertView.findViewById(R.id.tv_b);
-            vh.tv_c = (TextView)convertView.findViewById(R.id.tv_c);
-            vh.tv_d = (TextView)convertView.findViewById(R.id.tv_d);
-            vh.iv_a = (ImageView) convertView.findViewById(R.id.iv_a);
-            vh.iv_b = (ImageView) convertView.findViewById(R.id.iv_b);
-            vh.iv_c = (ImageView) convertView.findViewById(R.id.iv_c);
-            vh.iv_d = (ImageView) convertView.findViewById(R.id.iv_d);
-            convertView.setTag(vh);
+    public int getItemCount() {
+        return objects.size();
+    }
 
-        }else {
-            vh = (ViewHolder) convertView.getTag();
-        }
-        final  ExercisesBean bean = (ExercisesBean) getItem(position);
+
+
+    private void initializeViews(ExercisesBean object,final ViewHolder vh,final int position) {
+        //TODO implement
+        ExercisesBean bean = object;
+
         if (bean != null){
             vh.subject.setText(bean.subject);
             vh.tv_a.setText(bean.a);
@@ -105,7 +76,7 @@ public class ExercisesDetailAdapter extends BaseAdapter {
             vh.tv_c.setText(bean.c);
             vh.tv_d.setText(bean.d);
         }
-        if (!selectedPosition.contains(""+position)){
+        if (!selectedPosition.contains("" + position)){
             vh.iv_a.setImageResource(R.drawable.exercises_a);
             vh.iv_b.setImageResource(R.drawable.exercises_b);
             vh.iv_c.setImageResource(R.drawable.exercises_c);
@@ -207,18 +178,22 @@ public class ExercisesDetailAdapter extends BaseAdapter {
                         vh.iv_c.setImageResource(R.drawable.exercises_right_icon);
                     }
                     break;
-                    default:
-                        break;
+                default:
+                    break;
 
 
 
             }
         }
+         MyItemClickListener mListener;
         //当用户点击A选项的点击事件
         vh.iv_a.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 //判断selectPosition中是否含有此时点击的position
+                if (mItemClickListener != null){
+                    mItemClickListener.onItemClick(v,position);
+                }
                 if (selectedPosition.contains(""+position)){
                     selectedPosition.remove(""+position);
                 }else {
@@ -233,6 +208,9 @@ public class ExercisesDetailAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //判断selectPosition中是否含有此时点击的position
+                if (mItemClickListener != null){
+                    mItemClickListener.onItemClick(v,position);
+                }
                 if (selectedPosition.contains(""+position)){
                     selectedPosition.remove(""+position);
                 }else {
@@ -247,6 +225,9 @@ public class ExercisesDetailAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //判断selectPosition中是否含有此时点击的position
+                if (mItemClickListener != null){
+                    mItemClickListener.onItemClick(v,position);
+                }
                 if (selectedPosition.contains(""+position)){
                     selectedPosition.remove(""+position);
                 }else {
@@ -260,6 +241,9 @@ public class ExercisesDetailAdapter extends BaseAdapter {
         vh.iv_d.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                if (mItemClickListener != null){
+                    mItemClickListener.onItemClick(v,position);
+                }
                 //判断selectPosition中是否含有此时点击的position
                 if (selectedPosition.contains(""+position)){
                     selectedPosition.remove(""+position);
@@ -270,14 +254,46 @@ public class ExercisesDetailAdapter extends BaseAdapter {
 
             }
         });
-        return convertView;
+
     }
-    class ViewHolder  {
+
+
+    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView subject,tv_a,tv_b,tv_c,tv_d;
         public ImageView iv_a,iv_b,iv_c,iv_d;
+
+
+        public ViewHolder(View view,MyItemClickListener myItemClickListener) {
+            super(view);
+
+            subject = (TextView)view.findViewById(R.id.tv_subject);
+            iv_a = (ImageView)view.findViewById(R.id.iv_a);
+            iv_b = (ImageView)view.findViewById(R.id.iv_b);
+            iv_c = (ImageView)view.findViewById(R.id.iv_c);
+            iv_d = (ImageView)view.findViewById(R.id.iv_d);
+            tv_a = (TextView)view.findViewById(R.id.tv_a);
+            tv_b = (TextView)view.findViewById(R.id.tv_b);
+            tv_c = (TextView)view.findViewById(R.id.tv_c);
+            tv_d = (TextView)view.findViewById(R.id.tv_d);
+
+
+
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+    }
+    public interface MyItemClickListener{
+        void onItemClick(View view,int position);
+    }
+    public void setItemClickListener(MyItemClickListener myItemClickListener){
+        this.mItemClickListener = myItemClickListener;
     }
     public interface OnSelectListener{
-        void onSelectA(int position, ImageView iv_a,ImageView iv_b,ImageView iv_c,ImageView iv_d);
+        void onSelectA(int position, ImageView iv_a, ImageView iv_b,
+                       ImageView iv_c, ImageView iv_d);
         void onSelectB(int position,ImageView iv_a,ImageView iv_b,
                        ImageView iv_c,ImageView iv_d);
         void onSelectC(int position,ImageView iv_a,ImageView iv_b,

@@ -49,6 +49,19 @@ public class AnalysisUtils {
         iv_c.setEnabled(value);
         iv_d.setEnabled(value);
     }
+    public static boolean readExerciseStatus(Context context,int i){
+        SharedPreferences sharedPreferences=context.getSharedPreferences("exercises", Context.MODE_PRIVATE);
+        boolean isDone=sharedPreferences.getBoolean("isDone"+i,false);
+        return isDone;
+
+    }
+    public static void saveExerciseStatus(Context context,int i){
+
+        SharedPreferences sharedPreferences=context.getSharedPreferences("exercises", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putBoolean("isDone"+i,true);
+        editor.commit();
+    }
     /**
      * 解析每章的习题
      */

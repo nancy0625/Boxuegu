@@ -1,72 +1,85 @@
 package cn.edu.gdmec.android.boxuegu.activity;
 
-import android.content.pm.ActivityInfo;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.gdmec.android.boxuegu.Fragment.FragmentMyinfoFragment;
 import cn.edu.gdmec.android.boxuegu.R;
-import cn.edu.gdmec.android.boxuegu.adapter.ExercisesDetailAdapter;
+import cn.edu.gdmec.android.boxuegu.adapter.ActivityExercisesDetailAdapter;
 import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
-public class ExercisesDetailActivity extends AppCompatActivity {
-    private TextView tv_main_title;
+public class ActivityExercisesDetailActivity extends Activity {
+
     private TextView tv_back;
-    private RelativeLayout rl_title_bar;
-    private ListView lv_list;
+    private TextView tv_main_title;
+    private TextView tv_save;
+    private RelativeLayout title_bar;
     private RecyclerView rv_list;
-    private String title;
+    private TextView tv_di;
     private int id;
+    private String title;
+    public static int ff = 0;
+
     private List<ExercisesBean> ebl;
-    private ExercisesDetailAdapter adapter;
+    private ActivityExercisesDetailAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_detail);
-        //设置竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //获取从习题界面传递过来的章节id
         id = getIntent().getIntExtra("id",0);
-        // 从习题界面传递过来的章节标题
         title = getIntent().getStringExtra("title");
         ebl = new ArrayList<ExercisesBean>();
         initData();
-        init();
+        initView();
     }
 
-    private void init() {
-        tv_main_title = (TextView)findViewById(R.id.tv_main_title);
-        tv_back = (TextView)findViewById(R.id.tv_back);
-        rl_title_bar = (RelativeLayout)findViewById(R.id.title_bar);
-        rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
-        lv_list = (ListView)findViewById(R.id.lv_list);
-        TextView tv = new TextView(this);
-        tv.setTextColor(Color.parseColor("#000000"));
-        tv.setTextSize(16.0f);
-        tv.setText("一、选择题");
-        tv.setPadding(10,15,0,0);
-        lv_list.addHeaderView(tv);
-        tv_main_title.setText(title);
+    private void initData() {
+        try {
+            InputStream is = getResources().getAssets().open("chapter" + id + ".xml");
+            ebl = AnalysisUtils.getExercisesInfos(is);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initView() {
+        tv_back = (TextView) findViewById(R.id.tv_back);
+        tv_main_title = (TextView) findViewById(R.id.tv_main_title);
+        tv_save = (TextView) findViewById(R.id.tv_save);
+        title_bar = (RelativeLayout) findViewById(R.id.title_bar);
+        rv_list = (RecyclerView) findViewById(R.id.rv_list);
+        tv_di = (TextView) findViewById(R.id.tv_di);
+        title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
+
+
+
         tv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExercisesDetailActivity.this.finish();
+                ActivityExercisesDetailActivity.this.finish();
+
+
             }
         });
-        adapter = new ExercisesDetailAdapter(ExercisesDetailActivity.this, new ExercisesDetailAdapter.OnSelectListener() {
+
+        adapter = new ActivityExercisesDetailAdapter(ActivityExercisesDetailActivity.this, new ActivityExercisesDetailAdapter.OnSelectListener() {
             @Override
             public void onSelectA(int position, ImageView iv_a, ImageView iv_b, ImageView iv_c, ImageView iv_d) {
                 if (ebl.get(position).answer != 1){
@@ -183,21 +196,31 @@ public class ExercisesDetailActivity extends AppCompatActivity {
                 AnalysisUtils.setABCDEnable(false,iv_a,iv_b,iv_c,iv_d);
             }
         });
+
         adapter.setData(ebl);
-        lv_list.setAdapter(adapter);
-        //rv_list = (RecyclerView)findViewById(R.id.rv_list);
-        //rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //rv_list.setAdapte;
-    }
+        rv_list = (RecyclerView)findViewById(R.id.rv_list);
+        rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
-    private void initData() {
-        //从xml文件中获取习题数据
-        try {
-            InputStream is = getResources().getAssets().open("chapter" + id + ".xml");
-            ebl = AnalysisUtils.getExercisesInfos(is);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        adapter.setItemClickListener(new ActivityExercisesDetailAdapter.MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                int pp = position+1;
+                ff=ff+1;
+                tv_di.setText("第"+pp+"题完成，共5题");
+
+                if (ff==5){
+                    AnalysisUtils.saveExerciseStatus(ActivityExercisesDetailActivity.this,id);
+                    setResult(RESULT_OK);
+                }
+
+
+            }
+
+        });
+        rv_list.setAdapter(adapter);
+
+
     }
 }

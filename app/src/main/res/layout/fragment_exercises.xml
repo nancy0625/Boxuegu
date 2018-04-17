@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fragment_2"
-        android:textColor="@android:color/holo_purple"
-        android:textSize="50sp"/>
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/lv_list"
+        android:divider="#B4B4B4"
+        android:layout_marginBottom="55dp"
+        android:dividerHeight="1dp"></ListView>
 
 </LinearLayout>
