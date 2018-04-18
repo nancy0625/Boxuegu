@@ -1,5 +1,6 @@
 package cn.edu.gdmec.android.boxuegu.activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.gdmec.android.boxuegu.Fragment.FragmentCourseFragment;
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.adapter.ExercisesDetailAdapter;
 import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
@@ -45,6 +47,15 @@ public class ExercisesDetailActivity extends AppCompatActivity {
         ebl = new ArrayList<ExercisesBean>();
         initData();
         init();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,new FragmentCourseFragment()).commit();
+        }
+
     }
 
     private void init() {
