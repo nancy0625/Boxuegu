@@ -85,6 +85,7 @@ public class ExercisesAdapter extends BaseAdapter {
         if (bean != null){
             vh.order.setText(position + 1 + "");
             vh.title.setText(bean.title);
+            Log.i("e",AnalysisUtils.readExerciseStatus(mContext,position+1)+" "+(position+1));
             if (AnalysisUtils.readExerciseStatus(mContext,position+1)){
                 vh.content.setText("已完成");
 

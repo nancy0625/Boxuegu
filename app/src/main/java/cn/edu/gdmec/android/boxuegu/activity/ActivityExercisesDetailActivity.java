@@ -32,7 +32,7 @@ public class ActivityExercisesDetailActivity extends Activity {
     private TextView tv_di;
     private int id;
     private String title;
-    public static int ff = 0;
+    public  int ff = 0;
 
     private List<ExercisesBean> ebl;
     private ActivityExercisesDetailAdapter adapter;
@@ -206,13 +206,15 @@ public class ActivityExercisesDetailActivity extends Activity {
         adapter.setItemClickListener(new ActivityExercisesDetailAdapter.MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                int pp = position+1;
+
                 ff=ff+1;
-                tv_di.setText("第"+pp+"题完成，共5题");
+                tv_di.setText("第"+(position+1)+"题完成，共5题");
 
                 if (ff==5){
                     AnalysisUtils.saveExerciseStatus(ActivityExercisesDetailActivity.this,id);
+                    Log.i("DD",id+"");
                     setResult(RESULT_OK);
+                    //ff = 0;
                 }
 
 

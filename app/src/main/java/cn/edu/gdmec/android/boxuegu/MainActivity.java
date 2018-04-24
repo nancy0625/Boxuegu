@@ -52,7 +52,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
         }
         if (requestCode == 000){
-            this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,new FragmentExercisesFragment()).commit();
             setSelectedStatus(1);
         }
     }
@@ -109,6 +108,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 tv_main_title.setText("博学谷课程");
                 break;
             case 1:
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,new FragmentExercisesFragment()).commit();
                 //bottom_bar_exercises_btn.setSelected(true);
                 bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon_selected);
                 bottom_bar_text_exercises.setTextColor(Color.parseColor("#0097F7"));
