@@ -32,7 +32,7 @@ public class ActivityExercisesDetailActivity extends Activity {
     private TextView tv_di;
     private int id;
     private String title;
-    public  int ff = 0;
+    public static int ff = 0;
 
     private List<ExercisesBean> ebl;
     private ActivityExercisesDetailAdapter adapter;
@@ -214,7 +214,7 @@ public class ActivityExercisesDetailActivity extends Activity {
                     AnalysisUtils.saveExerciseStatus(ActivityExercisesDetailActivity.this,id);
                     Log.i("DD",id+"");
                     setResult(RESULT_OK);
-                    //ff = 0;
+                    ff = 0;
                 }
 
 
