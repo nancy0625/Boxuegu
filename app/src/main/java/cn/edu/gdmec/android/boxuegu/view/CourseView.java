@@ -105,7 +105,7 @@ public class CourseView {
         ada = new AdBannerAdapter(mContext.getSupportFragmentManager(),mHandler);
         adPager.setAdapter(ada);//给ViewPAger设置适配器
         adPager.setOnTouchListener(ada);
-        vpi = (ViewPagerIndicator) mCurrentView.findViewById(R.id.vpi_advert_indicator);
+        //vpi = (ViewPagerIndicator) mCurrentView.findViewById(R.id.vpi_advert_indicator);
         vpi.setCount(ada.getSize());//设置小圆点的个数
         adBannerLay = mCurrentView.findViewById(R.id.rl_adBanner);
         adPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -189,7 +189,7 @@ public class CourseView {
     private void getCourseData(){
         try {
             InputStream is = mContext.getResources().getAssets().open("chaptertitle.xml");
-            cbl = AnalysisUtils.getCourseInfos(is);
+            //cbl = AnalysisUtils.getCourseInfos(is);
         }catch (Exception e){
             e.printStackTrace();
         }

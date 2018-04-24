@@ -60,11 +60,11 @@ public class CourseAdapter extends BaseAdapter {
             vh = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.course_list_item,null);
             vh.iv_left_img = (ImageView)convertView.findViewById(R.id.iv_left_img);
-            vh.iv_right_img = (ImageView)convertView.findViewById(R.id.iv_right_img);
+            //vh.iv_right_img = (ImageView)convertView.findViewById(R.id.iv_right_img);
             vh.tv_left_img_title = (TextView)convertView.findViewById(R.id.tv_left_img_title);
-            vh.tv_right_img_title = (TextView)convertView.findViewById(R.id.tv_right_img_title);
+            ///vh.tv_right_img_title = (TextView)convertView.findViewById(R.id.tv_right_img_title);
             vh.tv_left_title = (TextView)convertView.findViewById(R.id.tv_left_title);
-            vh.tv_right_title = (TextView)convertView.findViewById(R.id.tv_right_title);
+            //vh.tv_right_title = (TextView)convertView.findViewById(R.id.tv_right_title);
             convertView.setTag(vh);
         }else {
             vh = (ViewHolder) convertView.getTag();
