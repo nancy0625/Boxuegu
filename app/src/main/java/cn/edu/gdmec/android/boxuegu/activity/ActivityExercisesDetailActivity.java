@@ -103,7 +103,6 @@ public class ActivityExercisesDetailActivity extends Activity {
                     case 4:
                         iv_a.setImageResource(R.drawable.exercises_error_icon);
                         iv_d.setImageResource(R.drawable.exercises_right_icon);
-
                         break;
                 }
                 AnalysisUtils.setABCDEnable(false,iv_a,iv_b,iv_c,iv_d);
