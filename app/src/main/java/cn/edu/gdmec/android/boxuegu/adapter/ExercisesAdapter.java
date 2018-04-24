@@ -31,7 +31,6 @@ public class ExercisesAdapter extends BaseAdapter {
     private Context mContext;
     private List<ExercisesBean> ebl = new ArrayList<ExercisesBean>();
     private LayoutInflater layoutInflater;
-    private int cou ;
     public ExercisesAdapter(Context context){
         this.mContext = context;
         this.layoutInflater = LayoutInflater.from(context);

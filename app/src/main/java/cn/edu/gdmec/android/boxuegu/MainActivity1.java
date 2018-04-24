@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import cn.edu.gdmec.android.boxuegu.activity.ExercisesView;
 import cn.edu.gdmec.android.boxuegu.activity.LoginActivity;
+import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 import cn.edu.gdmec.android.boxuegu.view.CourseView;
 import cn.edu.gdmec.android.boxuegu.view.MyInfoView;
 
@@ -94,6 +95,8 @@ public class MainActivity1 extends AppCompatActivity implements View.OnClickList
                /* clearBottomImageState();
                 selectDisplayView(0);*/
             }
+
+
             if (mMyInfoView != null){
                 //登录成功或退出登录时根据isLogin设置我的界面
                 mMyInfoView.setLoginParams(isLogin);

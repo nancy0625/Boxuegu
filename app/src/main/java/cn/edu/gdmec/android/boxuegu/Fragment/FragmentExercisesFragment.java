@@ -17,6 +17,7 @@ import cn.edu.gdmec.android.boxuegu.activity.ActivityExercisesDetailActivity;
 import cn.edu.gdmec.android.boxuegu.activity.ExercisesBean;
 import cn.edu.gdmec.android.boxuegu.adapter.ActivityExercisesDetailAdapter;
 import cn.edu.gdmec.android.boxuegu.adapter.ExercisesAdapter;
+import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
 
 public class FragmentExercisesFragment extends Fragment  {

@@ -52,6 +52,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
         }
         if (requestCode == 000){
+            this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,new FragmentExercisesFragment()).commit();
             setSelectedStatus(1);
         }
     }
