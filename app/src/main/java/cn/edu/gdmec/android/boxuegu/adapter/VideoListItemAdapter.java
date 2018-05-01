@@ -21,6 +21,8 @@ import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.activity.ActivityVideoListActivity;
 import cn.edu.gdmec.android.boxuegu.activity.DBUtils;
 import cn.edu.gdmec.android.boxuegu.activity.VideoBean;
+import cn.edu.gdmec.android.boxuegu.activity.VideoListActivity;
+import cn.edu.gdmec.android.boxuegu.activity.VideoPlayActivity;
 import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
 public class VideoListItemAdapter extends BaseAdapter {
@@ -101,7 +103,7 @@ public class VideoListItemAdapter extends BaseAdapter {
                             String userName = AnalysisUtils.readLoginUserName(context);
                             db.saveVideoPlayList(objects.get(position),userName);
                         }
-                        Intent intent = new Intent(context, ActivityVideoListActivity.class);
+                        Intent intent = new Intent(context, VideoPlayActivity.class);
                         intent.putExtra("videoPath",videoPath);
                         intent.putExtra("position",position);
                         ((Activity)context).startActivityForResult(intent,1);

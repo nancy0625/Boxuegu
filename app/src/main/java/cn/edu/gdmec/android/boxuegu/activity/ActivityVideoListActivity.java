@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import cn.edu.gdmec.android.boxuegu.R;
@@ -41,7 +43,6 @@ public class ActivityVideoListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_list);
-        initView();
         chapterId = getIntent().getIntExtra("id", 0);
         intro = getIntent().getStringExtra("intro");
         initData();
@@ -133,7 +134,9 @@ public class ActivityVideoListActivity extends Activity {
         return sb.toString();
     }
     private void initData(){
-        JSONArray jsonArray;
+        JSONArray jsonArray,jsonArray1;
+       List<String> list = new ArrayList<String>();
+       List<VideoBean> list1 = new ArrayList<VideoBean>();
         InputStream is = null;
         try {
             is = getResources().getAssets().open("data.json");
@@ -144,12 +147,33 @@ public class ActivityVideoListActivity extends Activity {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 if (jsonObject.getInt("chapterId") == chapterId){
                     bean.chapterId = jsonObject.getInt("chapterId");
-                    bean.videoId = Integer.parseInt(jsonObject.getString("videoId"));
-                    bean.title = jsonObject.getString("title");
-                    bean.secondTitle = jsonObject.getString("secondTitle");
-                    bean.videoPath = jsonObject.getString("videoPath");
-                    videoList.add(bean);
+                    String ss = jsonObject.getString("data");
+
+                    jsonArray1 = new JSONArray(ss);
+                    for (int j = 0; j < jsonArray1.length(); j++) {
+                        JSONObject jsonObject1 = (JSONObject) jsonArray1.get(j);
+
+                        Iterator<String> iterator = jsonObject1.keys();
+                        while (iterator.hasNext()) {
+                            String key = iterator.next();
+                            String value = jsonObject1.getString(key);
+                            list.add(value);
+
+                        }
+                        bean.videoId = Integer.parseInt(list.get(0));
+                        bean.title = list.get(1);
+                        bean.secondTitle = list.get(2);
+                        bean.videoPath = list.get(3);
+                        videoList.add(bean);
+                        bean = new VideoBean();
+                        list.clear();
+
+                        Log.i("Ss",videoList.toString());
+
+
+                    }
                 }
+
                 bean = null;
             }
         } catch (Exception e) {
