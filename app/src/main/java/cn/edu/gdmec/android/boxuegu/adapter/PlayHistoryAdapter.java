@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.edu.gdmec.android.boxuegu.R;
+import cn.edu.gdmec.android.boxuegu.activity.ActivityVideoListActivity;
 import cn.edu.gdmec.android.boxuegu.activity.VideoBean;
 import cn.edu.gdmec.android.boxuegu.activity.VideoPlayActivity;
 
@@ -112,7 +113,7 @@ public class PlayHistoryAdapter extends BaseAdapter {
                    return;
                 }else {
                     //跳转到播放视频界面
-                    Intent intent = new Intent(mContext, VideoPlayActivity.class);
+                    Intent intent = new Intent(mContext, ActivityVideoListActivity.class);
                     intent.putExtra("videoPath",bean.videoPath);
                     mContext.startActivity(intent);
                 }

@@ -13,8 +13,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.edu.gdmec.android.boxuegu.R;
+import cn.edu.gdmec.android.boxuegu.activity.ActivityVideoListActivity;
 import cn.edu.gdmec.android.boxuegu.activity.CourseBean;
-import cn.edu.gdmec.android.boxuegu.activity.VideoListActivity;
 
 /**
  * Created by asus on 2018/4/2.
@@ -83,7 +83,7 @@ public class CourseAdapter extends BaseAdapter {
                             @Override
                             public void onClick(View v) {
                                 //跳转到课程详情界面
-                                Intent intent = new Intent(mContext, VideoListActivity.class);
+                                Intent intent = new Intent(mContext, ActivityVideoListActivity.class);
                                 intent.putExtra("id",bean.id);
                                 intent.putExtra("intro",bean.intro);
                                 mContext.startActivity(intent);
@@ -99,7 +99,7 @@ public class CourseAdapter extends BaseAdapter {
                             @Override
                             public void onClick(View v) {
                                 //跳转到课程详情界面
-                                Intent intent = new Intent(mContext, VideoListActivity.class);
+                                Intent intent = new Intent(mContext, ActivityVideoListActivity.class);
                                 intent.putExtra("id",bean.id);
                                 intent.putExtra("intro",bean.intro);
                                 mContext.startActivity(intent);
